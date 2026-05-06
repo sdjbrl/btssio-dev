@@ -24,9 +24,14 @@ export default function Footer() {
             </Link>
           ))}
         </nav>
-        <p className="text-xs text-[#94A3B8] text-center">
-          Conforme BO spécial n°5 du 11 avril 2019 — Référentiel officiel EN
-        </p>
+        <div className="text-xs text-[#94A3B8] text-center space-y-1">
+          <p>
+            Créé par{" "}
+            <span className="text-[#22C55E] font-semibold">Saïd-Djibril AHMED MOUSSA</span>
+          </p>
+          <p>BTS SIO option SISR — 2ème année</p>
+          <p className="text-[#475569]">Conforme BO spécial n°5 du 11 avril 2019</p>
+        </div>
       </div>
     </footer>
   );
