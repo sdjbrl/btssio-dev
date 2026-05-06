@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X, Hexagon } from "lucide-react";
+import UserMenu from "./UserMenu";
 
 const navLinks = [
   {
@@ -72,6 +73,7 @@ export default function Navbar() {
           >
             S&apos;inscrire
           </Link>
+          <UserMenu />
         </div>
 
         {/* Mobile toggle */}
