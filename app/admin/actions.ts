@@ -15,8 +15,8 @@ async function requireAdmin() {
 
 export async function createUser(formData: FormData) {
   await requireAdmin();
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
+  const email = (formData.get("email") as string).trim();
+  const password = (formData.get("password") as string).trim();
 
   if (!email || !password || password.length < 8) {
     return { error: "Email et mot de passe requis (8 caractères minimum)." };
@@ -43,6 +43,8 @@ export async function createUser(formData: FormData) {
 
 export async function toggleActive(userId: string, currentState: boolean) {
   const session = await requireAdmin();
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (!UUID_RE.test(userId)) return { error: "Identifiant invalide." };
   if (userId === session.user.id) {
     return { error: "Impossible de modifier votre propre compte." };
   }
@@ -60,6 +62,8 @@ export async function toggleActive(userId: string, currentState: boolean) {
 
 export async function deleteUser(userId: string) {
   const session = await requireAdmin();
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (!UUID_RE.test(userId)) return { error: "Identifiant invalide." };
   if (userId === session.user.id) {
     return { error: "Impossible de supprimer votre propre compte." };
   }
