@@ -20,7 +20,7 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 export default function OralSimulator({ questions }: Props) {
-  const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>(() => shuffleArray(questions));
+  const [shuffledQuestions] = useState<Question[]>(() => shuffleArray(questions));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showHint, setShowHint] = useState(false);
 
