@@ -21,6 +21,7 @@ const navLinks = [
     color: "text-[#8B5CF6]",
   },
   { label: "Examens", href: "/examens" },
+  { label: "Annales", href: "/annales" },
   { label: "Progression", href: "/progression" },
 ];
 

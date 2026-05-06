@@ -1,9 +1,12 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 import CodeBlock from "@/components/CodeBlock";
 import QuizCard from "@/components/QuizCard";
 import CheatSheet from "@/components/CheatSheet";
 import OralSimulator from "@/components/OralSimulator";
+import AnnaleCard from "@/components/AnnaleCard";
+import { annales } from "@/lib/annales-data";
 import { examensQuiz } from "@/lib/quiz-data";
 import { updateModuleProgress } from "@/lib/progress";
 
@@ -173,30 +176,30 @@ export default function ExamensPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0F172A] text-white pt-24 pb-16">
-      <div className="max-w-4xl mx-auto px-6">
-        <h1 className="text-4xl font-bold mb-2">Préparation aux Épreuves</h1>
-        <p className="text-[#94A3B8] mb-8">
+    <div className="min-h-screen bg-[#0F172A] text-white pt-24 sm:pt-28 lg:pt-32 pb-8 sm:pb-12 lg:pb-16">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">Préparation aux Épreuves</h1>
+        <p className="text-[#94A3B8] mb-8 sm:mb-10">
           E4 Portfolio professionnel, E5 Conception & développement, E6 Cybersécurité
         </p>
 
         {/* SECTION 1 — Structure des épreuves */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-[#8B5CF6] mb-4">
+        <section className="mb-8 sm:mb-12">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#8B5CF6] mb-4">
             📋 Structure des Épreuves — Aide-mémoire
           </h2>
-          <div className="rounded-lg border border-[#475569] bg-[#1E293B] p-6">
+          <div className="rounded-lg border border-[#475569] bg-[#1E293B] p-4 sm:p-6">
             <CheatSheet items={epreuvesItems} />
           </div>
         </section>
 
         {/* SECTION 2 — Templates et conseils */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-[#8B5CF6] mb-4">
+        <section className="mb-8 sm:mb-12">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#8B5CF6] mb-4">
             📝 Modèles et Conseils
           </h2>
 
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div>
               <h3 className="text-lg font-semibold text-[#F8FAFC] mb-3">
                 1. Template de Fiche Descriptive d&apos;Activité (E4)
@@ -214,8 +217,8 @@ export default function ExamensPage() {
         </section>
 
         {/* SECTION 3 — Interactive Quiz */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-[#8B5CF6] mb-4">
+        <section className="mb-8 sm:mb-12">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#8B5CF6] mb-4">
             ✅ Quiz sur le Format des Épreuves
           </h2>
 
@@ -230,8 +233,8 @@ export default function ExamensPage() {
               />
             </>
           ) : (
-            <div className="rounded-lg border border-[#475569] bg-[#1E293B] p-6 text-center">
-              <p className="text-2xl font-bold mb-2" style={{ color: getScoreColor(score) }}>
+            <div className="rounded-lg border border-[#475569] bg-[#1E293B] p-4 sm:p-6 text-center">
+              <p className="text-xl sm:text-2xl font-bold mb-2" style={{ color: getScoreColor(score) }}>
                 Quiz terminé ! Score : {score}/{examensQuiz.length}
               </p>
               <p className="text-[#94A3B8] mb-4">
@@ -253,10 +256,31 @@ export default function ExamensPage() {
 
         {/* SECTION 4 — Oral Simulator */}
         <section>
-          <h2 className="text-2xl font-bold text-[#8B5CF6] mb-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#8B5CF6] mb-4">
             🎤 Questions Classiques des Jurys BTS SIO
           </h2>
           <OralSimulator questions={oralQuestions} />
+        </section>
+
+        {/* Annales récentes */}
+        <section className="mt-16 border-t border-[#334155] pt-12">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold font-mono">📋 Annales récentes</h2>
+            <Link
+              href="/annales"
+              className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+            >
+              Voir toutes les annales →
+            </Link>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {annales
+              .sort((a, b) => b.year - a.year)
+              .slice(0, 6)
+              .map((a) => (
+                <AnnaleCard key={a.id} annale={a} />
+              ))}
+          </div>
         </section>
       </div>
     </div>
