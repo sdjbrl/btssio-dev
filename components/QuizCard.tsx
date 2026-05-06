@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { QuizQuestion } from "@/lib/quiz-data";
 
 interface Props {
@@ -17,8 +17,21 @@ export default function QuizCard({ question, onComplete }: Props) {
   };
 
   const handleNext = () => {
+    if (selectedIndex === null) return;
     onComplete(selectedIndex === question.correct);
   };
+
+  useEffect(() => {
+    if (answered) return;
+    const handleKey = (e: KeyboardEvent) => {
+      const idx = ["a", "b", "c", "d"].indexOf(e.key.toLowerCase());
+      if (idx !== -1 && idx < question.choices.length) {
+        handleChoice(idx);
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [answered, question.choices.length]);
 
   return (
     <div className="rounded-lg border border-[#475569] bg-[#1B2336] p-6 mb-4">
@@ -45,6 +58,7 @@ export default function QuizCard({ question, onComplete }: Props) {
               key={i}
               onClick={() => !answered && handleChoice(i)}
               disabled={answered}
+              aria-label={`Choix ${String.fromCharCode(65 + i)}: ${choice}`}
               className={`w-full text-left text-sm px-4 py-3 rounded-md border transition-all font-sans ${style} disabled:cursor-default`}
             >
               <span className="font-mono mr-2 text-xs opacity-60">
@@ -58,11 +72,12 @@ export default function QuizCard({ question, onComplete }: Props) {
 
       {answered && (
         <>
-          <div className="mt-4 p-4 rounded-md text-sm font-sans bg-[#1E293B] text-[#E2E8F0] border border-[#475569]">
+          <div aria-live="polite" className="mt-4 p-4 rounded-md text-sm font-sans bg-[#1E293B] text-[#E2E8F0] border border-[#475569]">
             <p className="opacity-90 leading-relaxed">{question.explanation}</p>
           </div>
           <button
             onClick={handleNext}
+            aria-label="Question suivante"
             className="mt-4 px-6 py-2 bg-[#8B5CF6] hover:bg-[#7C3AED] text-white rounded-md text-sm font-medium transition-colors"
           >
             Suivant →

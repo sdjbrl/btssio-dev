@@ -12,7 +12,7 @@ export default function CheatSheet({ items, title }: Props) {
       <ul className="space-y-3">
         {items.map((item, i) => (
           <li
-            key={i}
+            key={`${item.label}-${i}`}
             className="pb-3 border-b border-[#1E293B] last:border-b-0 last:pb-0"
           >
             <div className="text-[#94A3B8] text-sm mb-1">{item.label}</div>

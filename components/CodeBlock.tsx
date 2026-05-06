@@ -20,12 +20,17 @@ export default function CodeBlock({ code, language, filename }: Props) {
     if (codeRef.current) {
       Prism.highlightElement(codeRef.current);
     }
-  }, [code]);
+  }, [code, language]);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard API unavailable (e.g. HTTP context, denied permission)
+      console.warn("Clipboard copy failed");
+    }
   };
 
   return (
