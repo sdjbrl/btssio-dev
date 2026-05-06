@@ -1,7 +1,10 @@
 "use server";
 
 import { signIn } from "@/lib/auth";
+import { checkRateLimit, resetRateLimit } from "@/lib/rate-limit";
+import { headers } from "next/headers";
 import { AuthError } from "next-auth";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 
 export async function loginAction(
   _prev: { error: string } | null,
@@ -17,6 +20,17 @@ export async function loginAction(
       ? callbackUrl
       : "/";
 
+  const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const rateLimitKey = `login:${ip}`;
+  const rateLimit = checkRateLimit(rateLimitKey);
+
+  if (!rateLimit.allowed) {
+    const minutesLeft = Math.ceil((rateLimit.resetAt - Date.now()) / 60000);
+    return {
+      error: `Trop de tentatives. Réessayez dans ${minutesLeft} minute${minutesLeft > 1 ? "s" : ""}.`,
+    };
+  }
+
   try {
     await signIn("credentials", {
       email,
@@ -25,10 +39,15 @@ export async function loginAction(
     });
     return null;
   } catch (error) {
+    if (isRedirectError(error)) {
+      resetRateLimit(rateLimitKey);
+      throw error;
+    }
+
     if (error instanceof AuthError) {
       return { error: "Identifiants invalides." };
     }
-    // signIn throws NEXT_REDIRECT on success — rethrow it
+
     throw error;
   }
 }

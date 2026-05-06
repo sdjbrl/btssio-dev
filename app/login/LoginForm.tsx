@@ -12,16 +12,16 @@ export default function LoginForm({ isFirstRun, callbackUrl }: Props) {
   const [state, formAction, pending] = useActionState(loginAction, null);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center p-4">
-      <div className="w-full max-w-sm">
-        <div className="text-center mb-8">
-          <span className="text-2xl font-bold text-white">
+    <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+      <div className="w-full max-w-md sm:max-w-lg">
+        <div className="text-center mb-6 sm:mb-8">
+          <span className="text-2xl sm:text-3xl font-bold text-white">
             BTSSIO<span className="text-[#22C55E]">.DEV</span>
           </span>
         </div>
 
-        <div className="bg-[#0F172A] border border-[#1E293B] rounded-xl p-8">
-          <h1 className="text-xl font-semibold text-white mb-2">
+        <div className="bg-[#0F172A] border border-[#1E293B] rounded-xl p-6 sm:p-8">
+          <h1 className="text-xl sm:text-2xl font-semibold text-white mb-2">
             {isFirstRun ? "Initialisation" : "Connexion"}
           </h1>
           <p className="text-[#94A3B8] text-sm mb-6">
@@ -30,7 +30,7 @@ export default function LoginForm({ isFirstRun, callbackUrl }: Props) {
               : "Connectez-vous pour accéder à la plateforme."}
           </p>
 
-          <form action={formAction} className="space-y-4">
+          <form action={formAction} className="space-y-4 sm:space-y-5">
             <input type="hidden" name="callbackUrl" value={callbackUrl} />
 
             <div>

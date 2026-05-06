@@ -73,9 +73,9 @@ export default function HomePage() {
       <Hero />
 
       {/* Modules section */}
-      <section className="max-w-6xl mx-auto px-4 py-12" aria-labelledby="modules-heading">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16" aria-labelledby="modules-heading">
         <div className="mb-8">
-          <h2 id="modules-heading" className="text-2xl font-bold text-white font-mono mb-2">
+          <h2 id="modules-heading" className="text-xl sm:text-2xl font-bold text-white font-mono mb-2">
             <span aria-hidden="true">📚</span> Modules de révision
           </h2>
           <p className="text-[#94A3B8] text-sm">
@@ -90,7 +90,7 @@ export default function HomePage() {
       </section>
 
       {/* Badges section */}
-      <section className="max-w-6xl mx-auto px-4 py-8 pb-16" aria-labelledby="badges-heading">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:pb-16" aria-labelledby="badges-heading">
         <h2 id="badges-heading" className="sr-only">Badges et récompenses</h2>
         <BadgesSection badges={[]} />
       </section>

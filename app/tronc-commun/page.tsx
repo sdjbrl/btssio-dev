@@ -112,30 +112,30 @@ export default function TroncCommunPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0F172A] text-white pt-24 pb-16">
-      <div className="max-w-4xl mx-auto px-6">
-        <h1 className="text-4xl font-bold mb-2">Tronc Commun — Bloc 1</h1>
-        <p className="text-[#94A3B8] mb-8">
+    <div className="min-h-screen bg-[#0F172A] text-white pt-24 sm:pt-28 lg:pt-32 pb-8 sm:pb-12 lg:pb-16">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">Tronc Commun — Bloc 1</h1>
+        <p className="text-[#94A3B8] mb-8 sm:mb-10">
           Support et mise à disposition de services informatiques (ITIL, gestion de parc, ticketing, déploiement)
         </p>
 
         {/* SECTION 1 — ITIL & Support Cheat Sheet */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-[#8B5CF6] mb-4">
+        <section className="mb-8 sm:mb-12">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#8B5CF6] mb-4">
             🎫 ITIL & Gestion du Support — Aide-mémoire
           </h2>
-          <div className="rounded-lg border border-[#475569] bg-[#1E293B] p-6">
+          <div className="rounded-lg border border-[#475569] bg-[#1E293B] p-4 sm:p-6">
             <CheatSheet items={itilItems} />
           </div>
         </section>
 
         {/* SECTION 2 — Code Examples */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-[#8B5CF6] mb-4">
+        <section className="mb-8 sm:mb-12">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#8B5CF6] mb-4">
             💻 Exemples de Code & Documentation
           </h2>
 
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div>
               <h3 className="text-lg font-semibold text-[#F8FAFC] mb-3">
                 1. Commandes PowerShell de base
@@ -153,8 +153,8 @@ export default function TroncCommunPage() {
         </section>
 
         {/* SECTION 3 — Interactive Quiz */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-[#8B5CF6] mb-4">
+        <section className="mb-8 sm:mb-12">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#8B5CF6] mb-4">
             ✅ Quiz de Validation
           </h2>
 
@@ -169,8 +169,8 @@ export default function TroncCommunPage() {
               />
             </>
           ) : (
-            <div className="rounded-lg border border-[#475569] bg-[#1E293B] p-6 text-center">
-              <p className="text-2xl font-bold mb-2" style={{ color: getScoreColor(score) }}>
+            <div className="rounded-lg border border-[#475569] bg-[#1E293B] p-4 sm:p-6 text-center">
+              <p className="text-xl sm:text-2xl font-bold mb-2" style={{ color: getScoreColor(score) }}>
                 Quiz terminé ! Score : {score}/{troncCommunQuiz.length}
               </p>
               <p className="text-[#94A3B8] mb-4">
@@ -192,7 +192,7 @@ export default function TroncCommunPage() {
 
         {/* SECTION 4 — Oral Simulator */}
         <section>
-          <h2 className="text-2xl font-bold text-[#8B5CF6] mb-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#8B5CF6] mb-4">
             🎤 Préparation à l&apos;Oral E4
           </h2>
           <OralSimulator questions={oralQuestions} />

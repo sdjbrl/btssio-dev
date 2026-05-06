@@ -13,7 +13,7 @@ export default function CreateUserForm() {
   const [state, formAction, pending] = useActionState<State, FormData>(createUserAction, null);
 
   return (
-    <form action={formAction} className="bg-gray-900 rounded-lg p-6 border border-gray-800 max-w-md">
+    <form action={formAction} className="w-full max-w-md sm:max-w-lg bg-gray-900 rounded-lg p-4 sm:p-6 border border-gray-800">
       {state?.success && (
         <div role="status" className="mb-4 p-3 bg-green-900/50 border border-green-500 rounded text-green-300 text-sm">
           Compte créé avec succès.

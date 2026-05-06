@@ -17,7 +17,7 @@ export default function SlamPage() {
       description: "PHP, HTML/CSS, JavaScript, frameworks MVC. Création d'applications web.",
       icon: <Globe className="w-5 h-5" />,
       progress: 0,
-      href: "/slam/bloc2/web",
+      href: "/slam/bloc2",
       option: "SLAM" as const,
     },
     {
@@ -25,7 +25,7 @@ export default function SlamPage() {
       description: "SQL, modélisation MCD/MLD, requêtes complexes, procédures stockées.",
       icon: <Database className="w-5 h-5" />,
       progress: 0,
-      href: "/slam/bloc2/bdd",
+      href: "/slam/bloc2",
       option: "SLAM" as const,
     },
     {
@@ -33,7 +33,7 @@ export default function SlamPage() {
       description: "Programmation orientée objet, design patterns, UML, architecture MVC.",
       icon: <Code2 className="w-5 h-5" />,
       progress: 0,
-      href: "/slam/bloc2/poo",
+      href: "/slam/bloc2",
       option: "SLAM" as const,
     },
     {
@@ -41,7 +41,7 @@ export default function SlamPage() {
       description: "Applications mobiles natives et hybrides. React Native, Android.",
       icon: <Smartphone className="w-5 h-5" />,
       progress: 0,
-      href: "/slam/bloc2/mobile",
+      href: "/slam/bloc2",
       option: "SLAM" as const,
     },
     {
@@ -89,8 +89,8 @@ export default function SlamPage() {
             {[
               { label: "Bloc 2 — Développement", href: "/slam/bloc2" },
               { label: "Bloc 3 — Cybersécurité", href: "/slam/bloc3" },
-              { label: "Fiches SQL", href: "/slam/bloc2/bdd" },
-              { label: "OWASP Top 10", href: "/slam/bloc3#owasp" },
+              { label: "Fiches SQL", href: "/slam/bloc2" },
+              { label: "OWASP Top 10", href: "/slam/bloc3" },
             ].map((link) => (
               <Link
                 key={link.href}
