@@ -8,6 +8,7 @@ const DUMMY_HASH = "$2b$12$invalidsaltinvalidsaltinvalidsa";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   secret: process.env.AUTH_SECRET,
+  trustHost: true,
   session: { strategy: "jwt" },
   pages: { signIn: "/login" },
   providers: [
