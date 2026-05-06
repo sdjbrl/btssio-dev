@@ -12,15 +12,30 @@ export function getProgress(): UserProgress {
   if (typeof window === "undefined") return defaultProgress();
   try {
     const stored = localStorage.getItem(KEY);
-    return stored ? JSON.parse(stored) : defaultProgress();
-  } catch {
+    if (!stored) return defaultProgress();
+    const parsed = JSON.parse(stored);
+    if (typeof parsed !== "object" || parsed === null) {
+      console.warn("Progress data has invalid structure, resetting to default");
+      return defaultProgress();
+    }
+    return parsed;
+  } catch (err) {
+    console.error("Failed to parse progress data:", err);
     return defaultProgress();
   }
 }
 
 export function saveProgress(p: UserProgress): void {
   if (typeof window === "undefined") return;
-  localStorage.setItem(KEY, JSON.stringify(p));
+  try {
+    localStorage.setItem(KEY, JSON.stringify(p));
+  } catch (err) {
+    if (err instanceof Error && err.name === "QuotaExceededError") {
+      console.warn("localStorage quota exceeded, cannot save progress:", err);
+    } else {
+      console.error("Failed to save progress:", err);
+    }
+  }
 }
 
 export function setOption(option: "SISR" | "SLAM"): void {
