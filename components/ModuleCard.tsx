@@ -29,6 +29,7 @@ export default function ModuleCard({
   badge,
 }: Props) {
   const accent = accentColors[option];
+  const normalizedProgress = Math.max(0, Math.min(100, progress ?? 0));
 
   return (
     <Link
@@ -53,6 +54,7 @@ export default function ModuleCard({
               backgroundColor: `${accent}20`,
               color: accent,
             }}
+            aria-label={`Badge : ${badge}`}
           >
             {badge}
           </span>
@@ -65,14 +67,21 @@ export default function ModuleCard({
         <div className="flex items-center justify-between">
           <span className="text-[#64748B] text-xs">Progression</span>
           <span className="text-[#64748B] text-xs font-semibold">
-            {progress}%
+            {normalizedProgress}%
           </span>
         </div>
-        <div className="w-full bg-[#0F172A] rounded-full h-2 overflow-hidden">
+        <div
+          className="w-full bg-[#0F172A] rounded-full h-2 overflow-hidden"
+          role="progressbar"
+          aria-valuenow={normalizedProgress}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label={`Progression du module : ${normalizedProgress}%`}
+        >
           <div
             className="h-full rounded-full transition-all duration-500 ease-out"
             style={{
-              width: `${progress}%`,
+              width: `${normalizedProgress}%`,
               backgroundColor: accent,
             }}
           />

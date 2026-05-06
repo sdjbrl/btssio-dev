@@ -1,7 +1,7 @@
 "use client";
 
 interface Props {
-  badges: string[];
+  badges?: string[];
 }
 
 const BADGE_DEFS = [
@@ -37,7 +37,7 @@ const BADGE_DEFS = [
   },
 ];
 
-export default function BadgesSection({ badges }: Props) {
+export default function BadgesSection({ badges = [] }: Props) {
   const earnedCount = badges.length;
   const totalBadges = BADGE_DEFS.length;
 
@@ -60,8 +60,10 @@ export default function BadgesSection({ badges }: Props) {
                   ? "bg-[#1E293B] border border-[#334155]"
                   : "bg-[#0F172A] border border-[#1E293B] opacity-40 grayscale"
               }`}
+              role="article"
+              aria-label={`${badge.label} — ${isEarned ? 'obtenu' : 'non obtenu'}`}
             >
-              <div className="text-4xl mb-2">
+              <div className="text-4xl mb-2" aria-hidden="true">
                 {isEarned ? badge.emoji : "🔐"}
               </div>
               <div className="text-white font-semibold text-sm mb-1">
