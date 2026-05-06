@@ -1,8 +1,14 @@
+import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import BentoGrid from "@/components/BentoGrid";
 import ModuleCard from "@/components/ModuleCard";
 import BadgesSection from "@/components/BadgesSection";
-import { Shield, Network, Code2, BookOpen, Server, Database } from "lucide-react";
+import { Shield, Network, Code2, BookOpen, Server } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Modules de révision BTS SIO — BTSSIO.DEV",
+  description: "Révisez le BTS SIO SISR & SLAM avec fiches de synthèse, QCM, TP guidés — basé sur le référentiel officiel BO n°5.",
+};
 
 export default function HomePage() {
   // Module data for the bento grid
@@ -67,10 +73,10 @@ export default function HomePage() {
       <Hero />
 
       {/* Modules section */}
-      <section className="max-w-6xl mx-auto px-4 py-12">
+      <section className="max-w-6xl mx-auto px-4 py-12" aria-labelledby="modules-heading">
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-white font-mono mb-2">
-            📚 Modules de révision
+          <h2 id="modules-heading" className="text-2xl font-bold text-white font-mono mb-2">
+            <span aria-hidden="true">📚</span> Modules de révision
           </h2>
           <p className="text-[#94A3B8] text-sm">
             Basé sur le référentiel officiel BO spécial n°5 du 11 avril 2019
@@ -84,7 +90,8 @@ export default function HomePage() {
       </section>
 
       {/* Badges section */}
-      <section className="max-w-6xl mx-auto px-4 py-8 pb-16">
+      <section className="max-w-6xl mx-auto px-4 py-8 pb-16" aria-labelledby="badges-heading">
+        <h2 id="badges-heading" className="sr-only">Badges et récompenses</h2>
         <BadgesSection badges={[]} />
       </section>
     </div>
