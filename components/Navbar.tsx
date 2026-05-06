@@ -62,17 +62,8 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* Auth buttons */}
+        {/* Auth menu */}
         <div className="hidden md:flex items-center gap-3">
-          <Link href="/login" className="text-sm text-[#94A3B8] hover:text-[#F8FAFC] transition-colors">
-            Se connecter
-          </Link>
-          <Link
-            href="/inscription"
-            className="text-sm bg-[#22C55E] text-[#0F172A] font-semibold px-4 py-1.5 rounded-md hover:bg-[#22C55E]/90 transition-colors"
-          >
-            S&apos;inscrire
-          </Link>
           <UserMenu />
         </div>
 
@@ -105,9 +96,9 @@ export default function Navbar() {
             );
           })}
           <hr className="border-[#475569] my-1" />
-          <Link href="/inscription" className="text-sm bg-[#22C55E] text-[#0F172A] font-semibold px-4 py-2 rounded-md text-center">
-            S&apos;inscrire gratuitement
-          </Link>
+          <div className="px-4 py-2">
+            <UserMenu />
+          </div>
         </nav>
       )}
     </nav>
