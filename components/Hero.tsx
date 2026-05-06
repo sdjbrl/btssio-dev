@@ -4,11 +4,11 @@ import Link from "next/link";
 import { Network, Code2, ChevronRight } from "lucide-react";
 
 const LINES = [
-  "> Initialisation BTS SIO Révision...",
-  "> Chargement du référentiel officiel EN... ✓",
-  "> Options détectées: [SISR] [SLAM]",
-  "> Modules disponibles: Bloc 1, 2, 3, Examens",
-  "> Prêt. Bonne chance pour tes révisions. _",
+  "$ btssio init --student",
+  "✓ Chargement du référentiel BTS SIO...",
+  "✓ Blocs de compétences SISR + SLAM détectés",
+  "✓ Quiz adaptatifs prêts",
+  "> Bonne révision ! 🚀",
 ];
 
 export default function Hero() {
