@@ -12,6 +12,7 @@ interface Props {
 export default function UserTable({ users, currentUserId }: Props) {
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [confirmId, setConfirmId] = useState<string | null>(null);
 
   async function handleToggle(user: UserDisplay) {
     setLoading(user.id);
@@ -21,11 +22,15 @@ export default function UserTable({ users, currentUserId }: Props) {
     setLoading(null);
   }
 
-  async function handleDelete(user: UserDisplay) {
-    if (!confirm(`Supprimer ${user.email} ?`)) return;
-    setLoading(user.id);
+  async function handleDelete(userId: string) {
+    if (confirmId !== userId) {
+      setConfirmId(userId);
+      return;
+    }
+    setConfirmId(null);
+    setLoading(userId);
     setError(null);
-    const result = await deleteUser(user.id);
+    const result = await deleteUser(userId);
     if ("error" in result) setError(result.error || null);
     setLoading(null);
   }
@@ -86,13 +91,32 @@ export default function UserTable({ users, currentUserId }: Props) {
                         >
                           {isLoading ? "..." : user.is_active ? "Désactiver" : "Activer"}
                         </button>
-                        <button
-                          onClick={() => handleDelete(user)}
-                          disabled={isLoading}
-                          className="px-3 py-1 text-xs rounded bg-red-900/50 hover:bg-red-800 text-red-300 disabled:opacity-50 transition-colors"
-                        >
-                          {isLoading ? "..." : "Supprimer"}
-                        </button>
+                        {confirmId === user.id ? (
+                          <span className="inline-flex gap-1">
+                            <button
+                              onClick={() => handleDelete(user.id)}
+                              disabled={isLoading}
+                              aria-label={`Confirmer la suppression de ${user.email}`}
+                              className="px-3 py-1 text-xs rounded bg-red-700 hover:bg-red-600 text-white disabled:opacity-50 transition-colors"
+                            >
+                              Confirmer
+                            </button>
+                            <button
+                              onClick={() => setConfirmId(null)}
+                              className="px-3 py-1 text-xs rounded bg-gray-700 hover:bg-gray-600 disabled:opacity-50 transition-colors"
+                            >
+                              Annuler
+                            </button>
+                          </span>
+                        ) : (
+                          <button
+                            onClick={() => handleDelete(user.id)}
+                            disabled={isLoading}
+                            className="px-3 py-1 text-xs rounded bg-red-900/50 hover:bg-red-800 text-red-300 disabled:opacity-50 transition-colors"
+                          >
+                            {isLoading ? "..." : "Supprimer"}
+                          </button>
+                        )}
                       </>
                     )}
                     {isSelf && <span className="text-gray-600 text-xs">Vous</span>}
