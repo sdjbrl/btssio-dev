@@ -3,6 +3,9 @@ import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { supabase, DbUser } from "./supabase";
 
+// Dummy hash for constant-time comparison to prevent timing attacks
+const DUMMY_HASH = "$2b$12$invalidsaltinvalidsaltinvalidsa";
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   secret: process.env.AUTH_SECRET,
   session: { strategy: "jwt" },
@@ -20,10 +23,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const email = credentials.email as string;
         const password = credentials.password as string;
 
+        // Validate email format and password length
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email) || password.length < 1) return null;
+
         // First-run: create admin account if no users exist
-        const { count } = await supabase
+        const { count, error: countError } = await supabase
           .from("users")
           .select("id", { count: "exact", head: true });
+
+        // Critical 3: Handle count === null (DB error)
+        if (countError || count === null) return null;
 
         if (count === 0) {
           const hash = await bcrypt.hash(password, 12);
@@ -32,9 +42,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             .insert({ email, password_hash: hash, role: "admin" })
             .select()
             .single();
-          if (error || !data) return null;
-          const user = data as DbUser;
-          return { id: user.id, email: user.email, role: user.role };
+          
+          // Critical 2: Handle race condition - if unique constraint fires, fall through to normal login
+          if (error) {
+            if (error.code !== "23505") return null;
+            // Race condition: another request created admin first — fall through to normal login below
+          } else {
+            const user = data as DbUser;
+            return { id: user.id, email: user.email, role: user.role };
+          }
         }
 
         // Normal login
@@ -44,10 +60,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           .eq("email", email)
           .single();
 
-        if (error || !data) return null;
+        // Critical 1: Run dummy bcrypt to prevent timing attack (user enumeration)
+        if (error || !data) {
+          await bcrypt.compare(password, DUMMY_HASH);
+          return null;
+        }
         const user = data as DbUser;
 
-        if (!user.is_active) return null;
+        if (!user.is_active) {
+          await bcrypt.compare(password, DUMMY_HASH);
+          return null;
+        }
 
         const valid = await bcrypt.compare(password, user.password_hash);
         if (!valid) return null;
