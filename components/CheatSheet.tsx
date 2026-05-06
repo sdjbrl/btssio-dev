@@ -1,38 +1,33 @@
-interface CheatItem {
-  label: string;
-  value?: string;
-  highlight?: boolean;
-  danger?: boolean;
-}
-
 interface Props {
-  items: CheatItem[];
-  columns?: 1 | 2;
+  items: Array<{ label: string; value: string; code?: boolean }>;
+  title?: string;
 }
 
-export default function CheatSheet({ items, columns = 1 }: Props) {
+export default function CheatSheet({ items, title }: Props) {
   return (
-    <ul className={`grid gap-2 ${columns === 2 ? "sm:grid-cols-2" : ""}`}>
-      {items.map((item, i) => (
-        <li
-          key={i}
-          className={`flex items-start gap-2 text-sm px-3 py-2 rounded-md border
-            ${item.danger
-              ? "border-[#EF4444]/30 bg-[#EF4444]/5 text-[#EF4444]"
-              : item.highlight
-              ? "border-[#22C55E]/30 bg-[#22C55E]/5 text-[#22C55E]"
-              : "border-[#475569] bg-[#272F42] text-[#F8FAFC]/80"
-            }`}
-        >
-          <span className="text-[#94A3B8] font-mono text-xs mt-0.5">
-            {item.danger ? "✗" : item.highlight ? "✓" : "·"}
-          </span>
-          <span>
-            <span className="font-semibold">{item.label}</span>
-            {item.value && <span className="text-[#94A3B8] ml-1">— {item.value}</span>}
-          </span>
-        </li>
-      ))}
-    </ul>
+    <div>
+      {title && (
+        <h3 className="text-[#8B5CF6] font-semibold text-lg mb-4">{title}</h3>
+      )}
+      <ul className="space-y-3">
+        {items.map((item, i) => (
+          <li
+            key={i}
+            className="pb-3 border-b border-[#1E293B] last:border-b-0 last:pb-0"
+          >
+            <div className="text-[#94A3B8] text-sm mb-1">{item.label}</div>
+            <div className="text-sm">
+              {item.code ? (
+                <code className="bg-[#1E293B] px-1 rounded font-mono text-[#22C55E] text-sm">
+                  {item.value}
+                </code>
+              ) : (
+                <span className="text-[#E2E8F0]">{item.value}</span>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
