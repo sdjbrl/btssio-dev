@@ -16,15 +16,20 @@ export default function Hero() {
 
   useEffect(() => {
     let i = 0;
+    let cancelled = false;
     const interval = setInterval(() => {
       if (i < LINES.length) {
         setVisibleLines((prev) => [...prev, LINES[i]]);
         i++;
-      } else {
-        clearInterval(interval);
+        if (i === LINES.length) {
+          clearInterval(interval);
+        }
       }
     }, 600);
-    return () => clearInterval(interval);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
   }, []);
 
   return (
@@ -40,7 +45,7 @@ export default function Hero() {
           </div>
           <div className="p-4 font-mono text-sm text-[#22C55E] min-h-[140px]">
             {visibleLines.map((line, i) => (
-              <p key={i} className={i === visibleLines.length - 1 ? "animate-pulse" : ""}>
+              <p key={`terminal-line-${i}`} className={visibleLines.length === LINES.length && i === visibleLines.length - 1 ? "animate-pulse" : ""}>
                 {line}
               </p>
             ))}
@@ -65,11 +70,12 @@ export default function Hero() {
         {/* SISR */}
         <Link
           href="/sisr"
-          className="group rounded-xl border border-[#22C55E]/30 bg-[#22C55E]/5 p-6 hover:bg-[#22C55E]/10 hover:border-[#22C55E]/60 transition-all"
+          aria-label="Accéder aux cours SISR — Infrastructure et Réseaux"
+          className="group rounded-xl border border-[#22C55E]/30 bg-[#22C55E]/5 p-6 hover:bg-[#22C55E]/10 hover:border-[#22C55E]/60 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#22C55E] focus-visible:outline-offset-2"
         >
           <div className="flex items-center gap-3 mb-3">
             <div className="p-2 rounded-lg bg-[#22C55E]/20">
-              <Network className="w-6 h-6 text-[#22C55E]" />
+              <Network className="w-6 h-6 text-[#22C55E]" aria-hidden="true" />
             </div>
             <div>
               <p className="font-mono font-bold text-[#22C55E]">SISR</p>
@@ -87,11 +93,12 @@ export default function Hero() {
         {/* SLAM */}
         <Link
           href="/slam"
-          className="group rounded-xl border border-[#8B5CF6]/30 bg-[#8B5CF6]/5 p-6 hover:bg-[#8B5CF6]/10 hover:border-[#8B5CF6]/60 transition-all"
+          aria-label="Accéder aux cours SLAM — Développement"
+          className="group rounded-xl border border-[#8B5CF6]/30 bg-[#8B5CF6]/5 p-6 hover:bg-[#8B5CF6]/10 hover:border-[#8B5CF6]/60 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#8B5CF6] focus-visible:outline-offset-2"
         >
           <div className="flex items-center gap-3 mb-3">
             <div className="p-2 rounded-lg bg-[#8B5CF6]/20">
-              <Code2 className="w-6 h-6 text-[#8B5CF6]" />
+              <Code2 className="w-6 h-6 text-[#8B5CF6]" aria-hidden="true" />
             </div>
             <div>
               <p className="font-mono font-bold text-[#8B5CF6]">SLAM</p>
