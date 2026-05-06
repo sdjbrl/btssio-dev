@@ -112,7 +112,7 @@ export default function Bloc3Page() {
     setQuizComplete(false);
   };
 
-  const getScoreColor = (s: number, total: number) => {
+  const getScoreColor = (s: number) => {
     if (s >= 5) return "#22C55E";
     if (s >= 3) return "#EAB308";
     return "#EF4444";
@@ -184,7 +184,7 @@ export default function Bloc3Page() {
             </>
           ) : (
             <div className="rounded-lg border border-[#475569] bg-[#1E293B] p-6 text-center">
-              <p className="text-2xl font-bold mb-2" style={{ color: getScoreColor(score, bloc3SlamQuiz.length) }}>
+              <p className="text-2xl font-bold mb-2" style={{ color: getScoreColor(score) }}>
                 Quiz terminé ! Score : {score}/{bloc3SlamQuiz.length}
               </p>
               <p className="text-[#94A3B8] mb-4">

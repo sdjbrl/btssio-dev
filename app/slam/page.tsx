@@ -81,7 +81,7 @@ export default function SlamPage() {
             <strong className="text-[#8B5CF6]">S</strong>olutions <strong className="text-[#8B5CF6]">L</strong>ogicielles et <strong className="text-[#8B5CF6]">A</strong>pplications <strong className="text-[#8B5CF6]">M</strong>étiers
           </p>
           <p className="text-[#64748B] text-sm mt-2">
-            Développement d'applications, bases de données, cybersécurité du code
+            Développement d&apos;applications, bases de données, cybersécurité du code
           </p>
 
           {/* Quick links */}
@@ -127,7 +127,7 @@ export default function SlamPage() {
           href="/"
           className="inline-flex items-center gap-2 text-[#64748B] hover:text-[#94A3B8] text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#64748B] focus-visible:outline-offset-2 rounded"
         >
-          ← Retour à l'accueil
+          ← Retour à l&apos;accueil
         </Link>
       </div>
     </div>

@@ -16,7 +16,6 @@ export default function Hero() {
 
   useEffect(() => {
     let i = 0;
-    let cancelled = false;
     const interval = setInterval(() => {
       if (i < LINES.length) {
         setVisibleLines((prev) => [...prev, LINES[i]]);
@@ -27,7 +26,6 @@ export default function Hero() {
       }
     }, 600);
     return () => {
-      cancelled = true;
       clearInterval(interval);
     };
   }, []);
@@ -60,8 +58,8 @@ export default function Hero() {
           <span className="text-[#22C55E]">module par module.</span>
         </h1>
         <p className="text-[#94A3B8] font-sans text-base md:text-lg max-w-xl mx-auto leading-relaxed">
-          Cours, QCM, TP guidés et simulateur d'oral basés sur le référentiel
-          officiel de l'Éducation Nationale.
+          Cours, QCM, TP guidés et simulateur d&apos;oral basés sur le référentiel
+          officiel de l&apos;Éducation Nationale.
         </p>
       </div>
 

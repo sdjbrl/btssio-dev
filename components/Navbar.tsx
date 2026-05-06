@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Network, Code2, BookOpen, TrendingUp, Menu, X, Hexagon } from "lucide-react";
+import { Menu, X, Hexagon } from "lucide-react";
 
 const navLinks = [
   {
@@ -70,7 +70,7 @@ export default function Navbar() {
             href="/inscription"
             className="text-sm bg-[#22C55E] text-[#0F172A] font-semibold px-4 py-1.5 rounded-md hover:bg-[#22C55E]/90 transition-colors"
           >
-            S'inscrire
+            S&apos;inscrire
           </Link>
         </div>
 
@@ -104,7 +104,7 @@ export default function Navbar() {
           })}
           <hr className="border-[#475569] my-1" />
           <Link href="/inscription" className="text-sm bg-[#22C55E] text-[#0F172A] font-semibold px-4 py-2 rounded-md text-center">
-            S'inscrire gratuitement
+            S&apos;inscrire gratuitement
           </Link>
         </nav>
       )}
