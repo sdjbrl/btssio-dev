@@ -93,16 +93,15 @@ export default function Bloc3Page() {
   const [quizComplete, setQuizComplete] = useState(false);
 
   const handleQuizComplete = (correct: boolean) => {
-    if (correct) {
-      setScore((s) => s + 1);
-    }
-
+    const newScore = correct ? score + 1 : score;
+    
     if (currentQuestionIndex + 1 < bloc3SlamQuiz.length) {
+      if (correct) setScore(newScore);
       setCurrentQuestionIndex((i) => i + 1);
     } else {
+      if (correct) setScore(newScore);
       setQuizComplete(true);
-      const finalScore = correct ? score + 1 : score;
-      const percentage = Math.round((finalScore / bloc3SlamQuiz.length) * 100);
+      const percentage = Math.round((newScore / bloc3SlamQuiz.length) * 100);
       updateModuleProgress("bloc3-slam-owasp", percentage);
     }
   };

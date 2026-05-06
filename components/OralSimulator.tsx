@@ -28,7 +28,27 @@ export default function OralSimulator({ questions }: Props) {
     setShuffledQuestions(shuffleArray(questions));
   }, [questions]);
 
-  if (shuffledQuestions.length === 0) return null;
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        setCurrentIndex((i) => Math.min(i + 1, shuffledQuestions.length - 1));
+        setShowHint(false);
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        setCurrentIndex((i) => Math.max(i - 1, 0));
+        setShowHint(false);
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [shuffledQuestions.length]);
+
+  if (shuffledQuestions.length === 0) {
+    return (
+      <div className="rounded-lg border border-[#475569] bg-[#1E293B] p-6" role="alert">
+        <p className="text-[#94A3B8]">Aucune question disponible.</p>
+      </div>
+    );
+  }
 
   const current = shuffledQuestions[currentIndex];
 
@@ -53,7 +73,7 @@ export default function OralSimulator({ questions }: Props) {
         <span>Simulateur d&apos;Oral</span>
       </h3>
 
-      <div className="mb-6">
+      <div className="mb-6" aria-live="polite" aria-atomic="true">
         <p className="text-xl text-white leading-relaxed mb-4">
           {current.question}
         </p>
