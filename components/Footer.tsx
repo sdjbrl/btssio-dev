@@ -17,7 +17,7 @@ export default function Footer() {
           <Hexagon className="w-5 h-5 text-[#22C55E]" />
           <span>BTSSIO.DEV</span>
         </div>
-        <nav className="flex flex-wrap justify-center gap-5">
+        <nav className="flex flex-wrap justify-center gap-5" aria-label="Pied de page">
           {links.map((l) => (
             <Link key={l.label} href={l.href} className="text-xs text-[#94A3B8] hover:text-[#F8FAFC] transition-colors">
               {l.label}
