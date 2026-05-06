@@ -125,7 +125,7 @@ export default function SlamPage() {
       <div className="max-w-6xl mx-auto px-4 pb-16">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-[#64748B] hover:text-[#94A3B8] text-sm transition-colors"
+          className="inline-flex items-center gap-2 text-[#64748B] hover:text-[#94A3B8] text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#64748B] focus-visible:outline-offset-2 rounded"
         >
           ← Retour à l'accueil
         </Link>
