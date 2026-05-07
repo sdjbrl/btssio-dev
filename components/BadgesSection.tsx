@@ -35,6 +35,12 @@ const BADGE_DEFS = [
     emoji: "💻",
     desc: "Module cybersécurité terminé",
   },
+  {
+    id: "expert-general",
+    label: "Expert Culture Générale",
+    emoji: "🎓",
+    desc: "Expert Culture Générale — Tous les modules généraux complétés",
+  },
 ];
 
 export default function BadgesSection({ badges = [] }: Props) {

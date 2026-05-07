@@ -72,6 +72,23 @@ function checkBadges(p: UserProgress): void {
   if ((p.modules["sisr-bloc3-cyber"] ?? 0) >= 100 && (p.modules["bloc3-slam-owasp"] ?? 0) >= 100) {
     award("hacker-ethique");
   }
+
+  const generalExpertModules = [
+    "cejm-marche",
+    "cejm-droit",
+    "cejm-management",
+    "cejm-rh",
+    "cejm-finance",
+    "anglais-vocabulaire",
+    "anglais-comprehension",
+    "anglais-expression",
+    "maths-algorithmique",
+    "cge-methodologie",
+  ];
+
+  if (generalExpertModules.every((id) => (p.modules[id] ?? 0) >= 100)) {
+    award("expert-general");
+  }
 }
 
 function defaultProgress(): UserProgress {
