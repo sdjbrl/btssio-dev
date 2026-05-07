@@ -213,7 +213,7 @@ export default function SisrBloc2Page() {
               <h3 className="text-lg font-semibold text-[#F8FAFC] mb-3">
                 1. Routage et VLAN — Cisco IOS
               </h3>
-              <CodeBlock code={ciscoRoutingCode} language="cisco" filename="router_config.txt" />
+              <CodeBlock code={ciscoRoutingCode} language="bash" filename="router_config.txt" />
             </div>
 
             <div>

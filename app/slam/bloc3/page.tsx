@@ -142,7 +142,7 @@ export default function Bloc3Page() {
             💻 Exemples de Code Sécurisé
           </h2>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="space-y-6">
             <div>
               <h3 className="text-lg font-semibold text-[#F8FAFC] mb-3">
                 1. Connexion PDO et requêtes préparées
