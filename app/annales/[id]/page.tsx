@@ -56,7 +56,7 @@ export default function AnnaleDetailPage() {
             className="inline-flex items-center gap-2 px-4 py-2 bg-[#1E293B] border border-[#334155] hover:border-[#475569] text-sm text-[#94A3B8] rounded-lg transition-colors"
           >
             <ExternalLink className="w-4 h-4" />
-            Voir le sujet officiel (PDF Eduscol)
+            Voir la page Eduscol
           </a>
         </div>
 

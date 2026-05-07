@@ -51,12 +51,26 @@ export function updateModuleProgress(moduleId: string, pct: number): void {
 }
 
 function checkBadges(p: UserProgress): void {
-  const allBloc3 = ["bloc3-slam-owasp", "bloc3-slam-rgpd", "bloc3-slam-auth", "bloc3-slam-comms", "bloc3-slam-bdd"];
-  if (allBloc3.every((id) => (p.modules[id] ?? 0) >= 100) && !p.badges.includes("gardien-donnees")) {
-    p.badges.push("gardien-donnees");
+  const award = (id: string) => { if (!p.badges.includes(id)) p.badges.push(id); };
+
+  // Maître OWASP: SLAM Bloc 3 quiz >= 80%
+  if ((p.modules["bloc3-slam-owasp"] ?? 0) >= 80) award("maitre-owasp");
+
+  // Gardien des Données: all SLAM Bloc 3 modules at 100%
+  const slamBloc3 = ["bloc3-slam-owasp", "bloc3-slam-rgpd", "bloc3-slam-auth", "bloc3-slam-comms", "bloc3-slam-bdd"];
+  if (slamBloc3.every((id) => (p.modules[id] ?? 0) >= 100)) award("gardien-donnees");
+
+  // Expert Réseau: both SISR modules at 100%
+  if ((p.modules["sisr-bloc2-admin"] ?? 0) >= 100 && (p.modules["sisr-bloc3-cyber"] ?? 0) >= 100) {
+    award("expert-reseau");
   }
-  if ((p.modules["bloc3-slam-owasp"] ?? 0) >= 80 && !p.badges.includes("maitre-owasp")) {
-    p.badges.push("maitre-owasp");
+
+  // As du SQL: SLAM Bloc 2 (covers SQL) at 100%
+  if ((p.modules["slam-bloc2-dev"] ?? 0) >= 100) award("as-du-sql");
+
+  // Hacker Éthique: both cybersecurity modules at 100%
+  if ((p.modules["sisr-bloc3-cyber"] ?? 0) >= 100 && (p.modules["bloc3-slam-owasp"] ?? 0) >= 100) {
+    award("hacker-ethique");
   }
 }
 

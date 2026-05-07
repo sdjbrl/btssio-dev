@@ -59,7 +59,7 @@ export default function AnnaleCard({ annale }: Props) {
           className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-[#0F172A] hover:bg-[#1E293B] border border-[#334155] hover:border-[#475569] text-[#94A3B8] rounded-lg transition-colors"
         >
           <ExternalLink className="w-3 h-3" />
-          PDF officiel
+          Page Eduscol
         </a>
         <Link
           href={`/annales/${annale.id}`}

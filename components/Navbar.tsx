@@ -50,7 +50,7 @@ export default function Navbar() {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => {
-            const isActive = pathname === link.href;
+            const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href + "/"));
             return (
               <Link
                 key={link.label}
@@ -58,8 +58,7 @@ export default function Navbar() {
                 className={`text-sm font-sans font-medium transition-colors ${isActive ? "text-[#22C55E] font-bold" : "text-[#94A3B8] hover:text-[#F8FAFC]"} ${link.color ?? ""}`}
               >
                 {link.label}
-              </Link>
-            );
+              </Link>            );
           })}
         </div>
 
@@ -84,7 +83,7 @@ export default function Navbar() {
       {open && (
         <nav id="mobile-menu" className="md:hidden bg-[#1B2336] border-t border-[#475569] px-4 py-4 flex flex-col gap-3" aria-label="Menu mobile">
           {navLinks.map((link) => {
-            const isActive = pathname === link.href;
+            const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href + "/"));
             return (
               <Link
                 key={link.label}

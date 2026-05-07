@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Prism from "prismjs";
+import "prismjs/themes/prism-tomorrow.css";
 import "prismjs/components/prism-markup";
 import "prismjs/components/prism-markup-templating"; // required by prism-php
 import "prismjs/components/prism-php";

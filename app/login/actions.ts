@@ -20,7 +20,8 @@ export async function loginAction(
       ? callbackUrl
       : "/";
 
-  const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const h = await headers();
+  const ip = h.get("x-real-ip") ?? h.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
   const rateLimitKey = `login:${ip}`;
   const rateLimit = checkRateLimit(rateLimitKey);
 
