@@ -8,11 +8,11 @@ interface Props {
 export default async function LoginPage({ searchParams }: Props) {
   const { callbackUrl = "/" } = await searchParams;
 
-  const { count } = await supabase
+  const { count, error: dbError } = await supabase
     .from("users")
     .select("id", { count: "exact", head: true });
 
-  const isFirstRun = count === 0;
+  const isFirstRun = !dbError && count === 0;
 
   return <LoginForm isFirstRun={isFirstRun} callbackUrl={callbackUrl} />;
 }
